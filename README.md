@@ -1,3 +1,5 @@
+# NAME : RISHI KEERTHI K
+# REGISTER NO : 212222043007 
 # EX.-NO-1-D-IMPLEMENTATION-OF-VIGENERE-CIPHER
 
 ## AIM:
@@ -21,8 +23,61 @@
   STEP-8: Repeat the above steps to generate the entire cipher text.
   
 ## PROGRAM:
+```
+#include <stdio.h>
+#include <string.h>
 
+void generateKey(const char* str, const char* key, char* newKey) {
+    int strLen = strlen(str);
+    int keyLen = strlen(key);
+    int i, j;
+
+    for(i = 0; i < strLen; i++) {
+        newKey[i] = key[i % keyLen];
+    }
+    newKey[i] = '\0';  // Null-terminate the new key
+}
+
+void cipherText(const char* str, const char* key, char* cipher_text) {
+    int strLen = strlen(str);
+    for(int i = 0; i < strLen; i++) {
+        char x = (str[i] + key[i]) % 26;
+        x += 'A';
+        cipher_text[i] = x;
+    }
+    cipher_text[strLen] = '\0';  // Null-terminate the ciphertext
+}
+
+void originalText(const char* cipher_text, const char* key, char* orig_text) {
+    int strLen = strlen(cipher_text);
+    for(int i = 0; i < strLen; i++) {
+        char x = (cipher_text[i] - key[i] + 26) % 26;
+        x += 'A';
+        orig_text[i] = x;
+    }
+    orig_text[strLen] = '\0';  // Null-terminate the original text
+}
+
+int main() {
+    char str[] = "HARSAYAZHENI";
+    char keyword[] = "HELLO";
+    char key[100];
+    char cipher_text[100];
+    char orig_text[100];
+
+    generateKey(str, keyword, key);
+    cipherText(str, key, cipher_text);
+    originalText(cipher_text, key, orig_text);
+
+    printf("Ciphertext : %s\n", cipher_text);
+    printf("Original/Decrypted Text : %s\n", orig_text);
+
+    return 0;
+}
+
+```
 ## OUTPUT:
+![image](https://github.com/user-attachments/assets/a8a7b42d-59c5-4921-b59d-7cbed9dbdb23)
 
 ## RESULT:
   Thus the Vigenere Cipher substitution technique had been implemented successfully.
